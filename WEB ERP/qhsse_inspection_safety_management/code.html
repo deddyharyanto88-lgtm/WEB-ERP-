@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QHSSE Management - Inspection Workflow</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#dae2fd",
+                        "surface-tint": "#005ac2",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "inverse-on-surface": "#eff1f3",
+                        "outline-variant": "#c2c6d6",
+                        "on-background": "#191c1e",
+                        "primary-container": "#2170e4",
+                        "error-container": "#ffdad6",
+                        "outline": "#727785",
+                        "on-surface-variant": "#424754",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e0e3e5",
+                        "background": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-surface": "#2d3133",
+                        "success": "#10b981",
+                        "border": "#e2e8f0",
+                        "surface-container": "#eceef0",
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#001a42",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-tertiary": "#ffffff",
+                        "info": "#0ea5e9",
+                        "secondary-container": "#dae2fd",
+                        "secondary": "#565e74",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00855b",
+                        "surface": "#ffffff",
+                        "on-secondary-container": "#5c647a",
+                        "on-primary-container": "#fefcff",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#adc6ff",
+                        "warning": "#f59e0b",
+                        "primary": "#0058be",
+                        "on-tertiary-container": "#f5fff6",
+                        "tertiary": "#006947",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "danger": "#f43f5e",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-variant": "#e0e3e5",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-tertiary-fixed": "#002113"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "32px",
+                        "input-padding-y": "8px",
+                        "base": "4px",
+                        "gutter": "16px",
+                        "input-padding-x": "12px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar Shell -->
+<aside class="docked left-0 top-0 h-screen w-64 border-r border-border bg-surface flex flex-col py-4 overflow-y-auto z-40 sticky">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Mini-ERP Pro</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Multi-Entity Manager</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-secondary hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-secondary hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">calculate</span> Estimation
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-secondary hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">construction</span> Operation
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-secondary hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">shopping_cart</span> Procurement
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-secondary hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">payments</span> Finance
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-secondary hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">groups</span> HR
+            </a>
+<!-- Active Tab: QHSSE -->
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-primary font-bold bg-secondary-container/30" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span> QHSSE
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 ease-in-out font-label-md text-label-md text-secondary hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined">warning</span> Risk Management
+            </a>
+</nav>
+<div class="px-3 mt-auto pt-4 border-t border-border">
+<a class="flex items-center gap-3 px-3 py-2.5 text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined">help</span> Support
+            </a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center px-6 h-16 w-full sticky top-0 z-30 bg-surface shadow-sm border-b border-border">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Search inspections, permits, reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-low rounded-full px-2 py-1 border border-outline-variant">
+<button class="px-3 py-1 rounded-full bg-primary text-on-primary text-label-sm font-label-sm">EN</button>
+<button class="px-3 py-1 rounded-full text-secondary text-label-sm font-label-sm hover:bg-surface-container-high transition-colors">ID</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-transform active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-transform active:scale-95">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-label-md">JD</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="p-6 max-w-[1440px] mx-auto w-full">
+<!-- Breadcrumbs & Title -->
+<div class="mb-8 flex justify-between items-end">
+<div>
+<nav class="flex text-label-sm text-on-surface-variant mb-2 gap-2">
+<span>QHSSE</span>
+<span>/</span>
+<span class="text-primary font-bold">Safety Inspection Workflow</span>
+</nav>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Inspection Workflow</h2>
+</div>
+<!-- Safety Milestone Counter -->
+<div class="bg-success/10 border border-success/20 rounded-xl px-6 py-4 flex items-center gap-4">
+<div class="bg-success text-on-primary w-12 h-12 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<div class="text-label-sm text-success font-bold uppercase tracking-wider">Days Without Accident</div>
+<div class="text-display font-display text-success">432</div>
+</div>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Column: Inspection Form (Main Action) -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<section class="bg-surface rounded-[24px] border border-border shadow-sm overflow-hidden">
+<div class="p-6 border-b border-border flex justify-between items-center bg-surface-bright">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+<h3 class="text-headline-md font-headline-md">Daily Site Inspection Checklist</h3>
+</div>
+<span class="px-3 py-1 bg-primary-container/20 text-primary-container font-label-sm text-label-sm rounded-full">Project ID: PRJ-2024-082</span>
+</div>
+<form class="p-6 space-y-8">
+<!-- Category 1: Materials -->
+<div>
+<h4 class="text-label-md font-label-md text-secondary uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full"></span> 1. Materials Handling &amp; Storage
+                                </h4>
+<div class="space-y-4">
+<!-- Checklist Item -->
+<div class="p-4 rounded-xl border border-border hover:border-outline transition-colors flex items-center justify-between">
+<div class="flex-1 pr-4">
+<p class="font-label-md text-label-md text-on-surface">Are hazardous materials stored in designated fire-rated cabinets?</p>
+</div>
+<div class="flex items-center gap-4">
+<!-- Status Indicators -->
+<div class="flex bg-surface-container rounded-lg p-1">
+<label class="cursor-pointer">
+<input class="hidden peer" name="check_1" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm peer-checked:bg-success peer-checked:text-on-primary transition-all flex items-center gap-1">Pass</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="check_1" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm peer-checked:bg-error peer-checked:text-on-primary transition-all flex items-center gap-1">Fail</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="check_1" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm peer-checked:bg-warning peer-checked:text-on-primary transition-all flex items-center gap-1">N/A</span>
+</label>
+</div>
+<button class="text-secondary hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined">add_a_photo</span>
+</button>
+</div>
+</div>
+<!-- Checklist Item (Failed Trigger State Example) -->
+<div class="p-4 rounded-xl border border-error/30 bg-error/5 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex-1 pr-4">
+<p class="font-label-md text-label-md text-on-surface">Are SDS sheets clearly visible and up-to-date for all chemicals?</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-surface-container rounded-lg p-1">
+<label class="cursor-pointer">
+<input class="hidden peer" name="check_2" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm peer-checked:bg-success peer-checked:text-on-primary transition-all">Pass</span>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="hidden peer" name="check_2" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm bg-error text-on-primary">Fail</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="check_2" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm peer-checked:bg-warning peer-checked:text-on-primary transition-all">N/A</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Photo Upload Placeholder -->
+<div class="flex gap-4">
+<div class="w-24 h-24 rounded-lg border-2 border-dashed border-error/40 flex items-center justify-center bg-white cursor-pointer hover:bg-error/10 transition-colors">
+<span class="material-symbols-outlined text-error">add</span>
+</div>
+<div class="flex-1 bg-white border border-error/20 p-3 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up high-resolution photograph of an outdated chemical safety data sheet on a dusty clipboard in an industrial warehouse setting. Harsh fluorescent lighting highlights the expired date on the document. The overall mood is cold and emphasizes safety non-compliance in a modern corporate industrial environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOPJnjbhdYmoTqejP6CB4Dn-OX7wA6_MqTAIOLm94lN7f0Pr1vmsMjGDN3h21A5jYdhrfG5gbPjeDxnzbyk83ZxSdHg5_qsTg4XkOTvDWDmaNPbmS3B0yQgkbWjsj_HYIiFa5aV3PSb344pz5MyS7RyvGfeAcUsa40u5Jsf4ItoCmIchbCYev_jwn4SiHBQEeUR8GjQ8XDm_W4DHCQOcVap-T5xeunCr7kYHO2DndhbSCDLVfhRfYwPA"/>
+</div>
+<div>
+<p class="text-label-sm font-bold text-on-surface">IMG_0023.jpg</p>
+<p class="text-[10px] text-on-surface-variant">Uploaded 2 mins ago</p>
+</div>
+</div>
+<button class="text-error" type="button"><span class="material-symbols-outlined">delete</span></button>
+</div>
+<!-- NCR Trigger -->
+<button class="bg-error text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:bg-error/90 transition-transform active:scale-95 shadow-md shadow-error/20" type="button">
+<span class="material-symbols-outlined">report_problem</span> Raise NCR
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Category 2: Equipment -->
+<div>
+<h4 class="text-label-md font-label-md text-secondary uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full"></span> 2. Heavy Equipment &amp; Tools
+                                </h4>
+<div class="space-y-4">
+<div class="p-4 rounded-xl border border-border hover:border-outline transition-colors flex items-center justify-between">
+<div class="flex-1 pr-4">
+<p class="font-label-md text-label-md text-on-surface">Daily inspection log for Excavator EX-04 completed?</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-surface-container rounded-lg p-1">
+<label class="cursor-pointer">
+<input checked="" class="hidden peer" name="check_3" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm bg-success text-on-primary">Pass</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="check_3" type="radio"/>
+<span class="px-4 py-1.5 rounded-md text-label-sm peer-checked:bg-error peer-checked:text-on-primary transition-all">Fail</span>
+</label>
+</div>
+<button class="text-secondary" type="button"><span class="material-symbols-outlined">add_a_photo</span></button>
+</div>
+</div>
+</div>
+</div>
+</form>
+<div class="p-6 bg-surface-container-low border-t border-border flex justify-end gap-4">
+<button class="px-6 py-2.5 rounded-xl border border-outline text-secondary font-label-md text-label-md hover:bg-surface transition-all">Draft Save</button>
+<button class="px-8 py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">Submit Final Inspection</button>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Widgets -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Permit to Work (PTW) Tracking -->
+<section class="bg-surface rounded-[24px] border border-border shadow-sm overflow-hidden">
+<div class="p-5 border-b border-border bg-surface-bright flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-warning">assignment_turned_in</span> Active Permits
+                            </h3>
+<button class="text-primary text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">add</span> New PTW
+                            </button>
+</div>
+<div class="p-4 space-y-4">
+<!-- PTW Card: Hot Work -->
+<div class="p-4 rounded-xl border border-warning/20 bg-warning/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-1 h-full bg-warning"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-sm font-bold text-warning uppercase">Hot Work</span>
+<span class="text-[10px] text-on-surface-variant">ID: PTW-HW-992</span>
+</div>
+<p class="text-body-md font-bold mb-1">Welding at Zone C, Level 2</p>
+<div class="flex items-center gap-3 text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 2h 45m left</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">person</span> Ahmed K.</span>
+</div>
+<div class="mt-3 w-full bg-warning/20 h-1.5 rounded-full">
+<div class="bg-warning h-1.5 rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<!-- PTW Card: Confined Space -->
+<div class="p-4 rounded-xl border border-error/20 bg-error/5 relative overflow-hidden">
+<div class="absolute right-0 top-0 w-1 h-full bg-error"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-sm font-bold text-error uppercase">Confined Space</span>
+<span class="text-[10px] text-on-surface-variant">ID: PTW-CS-401</span>
+</div>
+<p class="text-body-md font-bold mb-1">Tank Cleaning - Unit 4</p>
+<div class="flex items-center gap-3 text-label-sm text-error font-bold animate-pulse">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">error</span> EXPIRED</span>
+</div>
+<button class="mt-3 w-full py-1.5 bg-error text-on-primary text-label-sm rounded-lg">Cease Operation</button>
+</div>
+<!-- PTW Card: Working at Height -->
+<div class="p-4 rounded-xl border border-border hover:bg-surface-container-low transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-sm font-bold text-primary uppercase">Height Work</span>
+<span class="text-[10px] text-on-surface-variant">ID: PTW-WH-212</span>
+</div>
+<p class="text-body-md font-bold mb-1">Scaffolding Erection</p>
+<div class="flex items-center gap-3 text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 6h 12m left</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent NCR Summary -->
+<section class="bg-surface rounded-[24px] border border-border shadow-sm">
+<div class="p-5 border-b border-border flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md">Recent NCRs</h3>
+<span class="w-6 h-6 rounded-full bg-error text-on-error text-[10px] flex items-center justify-center font-bold">12</span>
+</div>
+<div class="p-2">
+<table class="w-full text-left">
+<thead class="text-[11px] text-on-surface-variant uppercase font-bold border-b border-border">
+<tr>
+<th class="px-4 py-3">NCR ID</th>
+<th class="px-4 py-3">Severity</th>
+<th class="px-4 py-3">Status</th>
+</tr>
+</thead>
+<tbody class="text-table-data">
+<tr class="border-b border-border/50 hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-3 font-bold">NCR-021</td>
+<td class="px-4 py-3">
+<span class="flex items-center gap-1 text-error"><span class="w-2 h-2 rounded-full bg-error"></span> Critical</span>
+</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px]">OPEN</span></td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-3 font-bold">NCR-019</td>
+<td class="px-4 py-3">
+<span class="flex items-center gap-1 text-warning"><span class="w-2 h-2 rounded-full bg-warning"></span> Major</span>
+</td>
+<td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px]">PENDING</span></td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 text-center">
+<button class="text-primary text-label-sm font-bold">View All Reports</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Quick Actions -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-50">
+<span class="material-symbols-outlined text-[32px]">emergency</span>
+</button>
+<script>
+        // Simple Micro-interaction for Permit Hover
+        document.querySelectorAll('.group').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.transform = 'translateY(-2px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Toggle Language logic (UI only)
+        const langBtns = document.querySelectorAll('button.text-label-sm');
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                langBtns.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('text-secondary');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary');
+                btn.classList.remove('text-secondary');
+            });
+        });
+    </script>
+</body></html>

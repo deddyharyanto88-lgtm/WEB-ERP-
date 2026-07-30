@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PO Print Template Configuration | ERP Contractor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .preview-pane::-webkit-scrollbar {
+            width: 6px;
+        }
+        .preview-pane::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .preview-pane::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #0058be;
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-surface": "#191c1e",
+                        "surface": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "success": "#10b981",
+                        "secondary-fixed": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-variant": "#e0e3e5",
+                        "primary-container": "#2170e4",
+                        "on-secondary-container": "#5c647a",
+                        "border": "#e2e8f0",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary-fixed": "#001a42",
+                        "outline-variant": "#c2c6d6",
+                        "info": "#0ea5e9",
+                        "on-primary-container": "#fefcff",
+                        "on-surface-variant": "#424754",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#006947",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#005ac2",
+                        "warning": "#f59e0b",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#adc6ff",
+                        "tertiary-container": "#00855b",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-container": "#dae2fd",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#131b2e",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "secondary": "#565e74",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-tertiary-container": "#f5fff6",
+                        "outline": "#727785",
+                        "danger": "#f43f5e",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#0058be",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "inverse-on-surface": "#eff1f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "input-padding-x": "12px",
+                        "container-margin": "24px",
+                        "base": "4px",
+                        "section-gap": "32px",
+                        "gutter": "16px",
+                        "input-padding-y": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "table-data": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "table-data": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<div class="flex h-screen w-screen">
+<!-- Side Navigation Shell -->
+<aside class="flex flex-col h-full py-4 overflow-y-auto bg-surface border-r border-border w-64 flex-shrink-0 z-40">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Mini-ERP Pro</h1>
+<p class="text-on-secondary-container font-label-sm text-label-sm">Multi-Entity Manager</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-label-md text-label-md">Estimation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-label-md text-label-md">Operation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary font-bold bg-secondary-container/30 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Finance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">HR</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md text-label-md">QHSSE</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-md text-label-md">Risk Management</span>
+</a>
+</nav>
+<div class="px-3 mt-auto space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background relative">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-gutter h-16 w-full sticky top-0 z-50 bg-surface shadow-sm">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">ERP Contractor</h2>
+<div class="h-6 w-[1px] bg-border mx-2"></div>
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Template Configuration</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-transform scale-95 active:scale-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-transform scale-95 active:scale-100">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">
+                        JD
+                    </div>
+</div>
+</header>
+<!-- Configuration Workspace -->
+<div class="flex-1 overflow-hidden flex flex-col md:flex-row">
+<!-- Settings Panel -->
+<section class="w-full md:w-[400px] bg-surface border-r border-border overflow-y-auto p-6 space-y-8 flex-shrink-0">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Print Customization</h3>
+<p class="text-on-surface-variant text-body-md mb-6">Modify how Purchase Orders are generated and formatted for your vendors.</p>
+</div>
+<!-- Logo Uploader -->
+<div class="space-y-3">
+<label class="block font-label-md text-label-md text-on-surface">Company Letterhead Logo</label>
+<div class="border-2 border-dashed border-border rounded-xl p-6 flex flex-col items-center justify-center bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline mb-2 group-hover:text-primary">upload_file</span>
+<span class="text-label-sm text-on-surface-variant">Click to upload or drag &amp; drop</span>
+<span class="text-[10px] text-outline mt-1">PNG, JPG up to 5MB (Recom. 400x120px)</span>
+</div>
+<div class="flex items-center gap-3 p-2 bg-surface-container-low rounded-lg border border-border">
+<div class="w-10 h-10 bg-white rounded border border-border flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="A professional corporate logo design for a construction company named ERP Contractor. The logo features clean geometric lines and a modern architectural silhouette in navy blue and slate grey colors, isolated on a white background. Professional, high-end branding for a multi-entity management software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByFZTRrlKlnMJolsImwMzTJeZyIJte2HCIuItUx5H0bt41q8ZQv4OtQ0b3f7uG0vz-Nzr3WyHeNDFLXwezyvmx_yt82ecMFadyzoGvhWIk69HPiRV6WUgbuabi5I5z2NQM-qcQM5i8_CMDyYCufu2li-6_8PEyRLf0bzR9eKFU_jQ5X1Nl2X1lPJpmzEoSTVL4YKUZPOu6sTrqgwpChsAQAQPQGKtZpaFN5Y5HHPljPVj64FJeBGTc9A"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md truncate">logo_final_v2.png</p>
+<p class="text-[10px] text-outline">Uploaded 2 mins ago</p>
+</div>
+<button class="text-danger p-1 hover:bg-error-container rounded transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+<!-- Visibility Toggles -->
+<div class="space-y-4">
+<label class="block font-label-md text-label-md text-on-surface">Layout Display Fields</label>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-border">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">percent</span>
+<span class="text-body-md">Show Tax Breakdown</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-11 h-6 bg-surface-variant rounded-full transition-colors duration-200">
+<div class="toggle-dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-border">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<span class="text-body-md">Shipping Address</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-11 h-6 bg-surface-variant rounded-full transition-colors duration-200">
+<div class="toggle-dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-border">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">gavel</span>
+<span class="text-body-md">Terms &amp; Conditions</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-11 h-6 bg-surface-variant rounded-full transition-colors duration-200">
+<div class="toggle-dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Text Editors -->
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Header Custom Text</label>
+<textarea class="w-full rounded-xl border-border bg-surface text-body-md focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all p-3" placeholder="e.g. Authorized Purchase Order" rows="2">Authorized Purchase Order</textarea>
+</div>
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Footer Disclosure</label>
+<textarea class="w-full rounded-xl border-border bg-surface text-body-md focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all p-3" placeholder="Add legal footer here..." rows="3">Payments are due within 30 days of invoice receipt. Please include the PO number on all correspondence.</textarea>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-6 border-t border-border flex flex-col gap-3">
+<button class="w-full bg-primary text-on-primary py-3 px-6 rounded-xl font-label-md text-label-md shadow-sm hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">save</span>
+                            Save Template
+                        </button>
+<button class="w-full bg-surface border border-border text-on-surface py-3 px-6 rounded-xl font-label-md text-label-md hover:bg-surface-container-low transition-all">
+                            Reset to Default
+                        </button>
+</div>
+</section>
+<!-- Live Preview Pane -->
+<section class="flex-1 bg-surface-container-low p-8 overflow-y-auto preview-pane">
+<div class="max-w-4xl mx-auto">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Live Preview (A4 Format)</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 bg-surface rounded-lg shadow-sm hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-secondary">zoom_in</span>
+</button>
+<button class="p-2 bg-surface rounded-lg shadow-sm hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-secondary">print</span>
+</button>
+</div>
+</div>
+<!-- Virtual PO Document -->
+<div class="bg-white shadow-xl w-full min-h-[1100px] p-12 flex flex-col border border-border mx-auto rounded-sm relative">
+<!-- Header Section -->
+<div class="flex justify-between items-start mb-12 border-b-2 border-primary pb-8">
+<div class="space-y-4">
+<img class="h-16 w-auto" data-alt="A high-resolution corporate logo for ERP Contractor, displaying a minimalist blue icon resembling a crane and structural beams. The typography is modern and bold. Set against a clean white background, this version is specifically formatted for a business document header." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByTWJp5_0pxLubVNgptlQj8Y-yWA0hSwC7rSpUPqDaqOVCTyXVKPMRh5R6Vbiwzz4E-zPughHO9qHP7twoh5zBDS6rfGD7xA-uCa84MZWHdhxKTyxvD9ReUdP4nDhmPAwd_pNYE-fTsgcT6Qhv0fyHDOr5Uz2wlj0C7-6sgmqbyNlNL9IoCR1X6rI18aFapQi083TOVyD2M9_rDsCnKs4PDiSDVrkZBpk46X2IySlRxv_9FsyIPcNEGQ"/>
+<div class="text-body-md text-on-surface leading-tight">
+<p class="font-bold">ERP Contractor Solutions LLC</p>
+<p>123 Construction Way</p>
+<p>Build City, BC 54321</p>
+<p>+1 (555) 0123-4567</p>
+</div>
+</div>
+<div class="text-right space-y-2">
+<h1 class="text-3xl font-bold text-primary tracking-tight uppercase">Purchase Order</h1>
+<p class="text-body-md text-on-surface-variant font-medium">PO #2024-00892</p>
+<p class="text-body-md text-on-surface-variant">Date: Oct 24, 2023</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-12 mb-12">
+<div class="space-y-2">
+<p class="font-label-md text-label-md text-primary uppercase border-b border-border pb-1">Vendor</p>
+<div class="text-body-md leading-relaxed">
+<p class="font-bold">Steel Pro Fabrications</p>
+<p>45 Industrial Blvd</p>
+<p>Metropolis, MX 99881</p>
+<p>Contact: Sarah Jenkins</p>
+</div>
+</div>
+<div class="space-y-2">
+<p class="font-label-md text-label-md text-primary uppercase border-b border-border pb-1">Ship To</p>
+<div class="text-body-md leading-relaxed">
+<p class="font-bold">The Heights Project Site</p>
+<p>Site Entry 4, North Gate</p>
+<p>Central District, BC 54322</p>
+<p>Attention: Site Manager</p>
+</div>
+</div>
+</div>
+<!-- Table Section -->
+<div class="flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-y border-border">
+<th class="py-3 px-4 font-label-md text-label-md uppercase">Item Description</th>
+<th class="py-3 px-4 font-label-md text-label-md uppercase text-center">Qty</th>
+<th class="py-3 px-4 font-label-md text-label-md uppercase text-right">Unit Price</th>
+<th class="py-3 px-4 font-label-md text-label-md uppercase text-right">Total</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="border-b border-border/50">
+<td class="py-4 px-4">Structural I-Beams (Grade A572) - 20ft</td>
+<td class="py-4 px-4 text-center">15</td>
+<td class="py-4 px-4 text-right">$450.00</td>
+<td class="py-4 px-4 text-right font-medium">$6,750.00</td>
+</tr>
+<tr class="border-b border-border/50">
+<td class="py-4 px-4">High-Tensile Bolts (Box of 500)</td>
+<td class="py-4 px-4 text-center">4</td>
+<td class="py-4 px-4 text-right">$85.00</td>
+<td class="py-4 px-4 text-right font-medium">$340.00</td>
+</tr>
+<tr class="border-b border-border/50">
+<td class="py-4 px-4">Welding Consumables - Rods E7018</td>
+<td class="py-4 px-4 text-center">10</td>
+<td class="py-4 px-4 text-right">$32.50</td>
+<td class="py-4 px-4 text-right font-medium">$325.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Totals & Footer Section -->
+<div class="mt-8 space-y-8">
+<div class="flex justify-end">
+<div class="w-64 space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Subtotal</span>
+<span>$7,415.00</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Tax (8.5%)</span>
+<span>$630.28</span>
+</div>
+<div class="flex justify-between text-lg font-bold border-t-2 border-primary pt-2 mt-2">
+<span class="text-primary">Total Amount</span>
+<span>$8,045.28</span>
+</div>
+</div>
+</div>
+<div class="space-y-6 pt-12">
+<div class="space-y-2">
+<p class="font-label-md text-label-md text-primary uppercase border-b border-border pb-1">Terms &amp; Conditions</p>
+<p class="text-[12px] leading-relaxed text-on-surface-variant">
+                                            Payments are due within 30 days of invoice receipt. Please include the PO number on all correspondence. ERP Contractor reserve the right to audit shipping logs. Standard warranty protocols apply to all structural materials as per the master service agreement.
+                                        </p>
+</div>
+<div class="flex justify-between items-center pt-8">
+<div class="flex flex-col gap-1">
+<div class="w-48 border-b border-on-surface h-8"></div>
+<span class="text-[10px] text-on-surface-variant uppercase">Authorized Signature</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-outline italic">Generated by Mini-ERP Pro | Secure Document ID: 8XF-902-L</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for scrolling comfort -->
+<div class="h-16"></div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple Toggle interaction logic for UI feedback
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                const label = e.target.closest('label').querySelector('.toggle-label');
+                const dot = label.querySelector('.toggle-dot');
+                if(e.target.checked) {
+                    label.classList.add('bg-primary');
+                    label.classList.remove('bg-surface-variant');
+                    dot.style.transform = 'translateX(100%)';
+                } else {
+                    label.classList.remove('bg-primary');
+                    label.classList.add('bg-surface-variant');
+                    dot.style.transform = 'translateX(0)';
+                }
+            });
+        });
+
+        // Search Bar (Injected placeholder from TopNavBar logic)
+        // In this specific layout, we focus on the central task but maintain the brand shell
+    </script>
+</body></html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Procurement Management | Mini-ERP Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "warning": "#f59e0b",
+                        "primary-fixed-dim": "#adc6ff",
+                        "danger": "#f43f5e",
+                        "border": "#e2e8f0",
+                        "outline": "#727785",
+                        "primary-container": "#2170e4",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#dae2fd",
+                        "inverse-primary": "#adc6ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00855b",
+                        "success": "#10b981",
+                        "surface-variant": "#e0e3e5",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed-variant": "#004395",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#002113",
+                        "outline-variant": "#c2c6d6",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#fefcff",
+                        "info": "#0ea5e9",
+                        "on-primary-fixed": "#001a42",
+                        "surface-container-highest": "#e0e3e5",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#5c647a",
+                        "surface-container": "#eceef0",
+                        "secondary-container": "#dae2fd",
+                        "surface": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary": "#006947",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-dim": "#d8dadc",
+                        "primary": "#0058be",
+                        "on-tertiary-container": "#f5fff6",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#005ac2",
+                        "on-error": "#ffffff",
+                        "background": "#f7f9fb",
+                        "secondary": "#565e74",
+                        "on-background": "#191c1e",
+                        "on-surface-variant": "#424754",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-high": "#e6e8ea",
+                        "on-secondary-fixed": "#131b2e",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "input-padding-y": "8px",
+                        "section-gap": "32px",
+                        "container-margin": "24px",
+                        "base": "4px",
+                        "input-padding-x": "12px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display": ["Inter"],
+                        "table-data": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "table-data": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .po-preview-container {
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.05);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .best-value-glow {
+            box-shadow: 0 0 0 2px #10b981, 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
+<!-- SideNavBar Integration -->
+<aside class="flex flex-col h-full py-4 overflow-y-auto border-r border-border bg-surface w-64 shrink-0">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Mini-ERP Pro</h1>
+<p class="text-label-sm font-label-sm text-secondary">Multi-Entity Manager</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">calculate</span>
+<span class="font-label-md text-label-md">Estimation</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">construction</span>
+<span class="font-label-md text-label-md">Operation</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-primary font-bold bg-secondary-container/30 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">shopping_cart</span>
+<span class="font-label-md text-label-md">Procurement</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-label-md text-label-md">Finance</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="font-label-md text-label-md">HR</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">security</span>
+<span class="font-label-md text-label-md">QHSSE</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">warning</span>
+<span class="font-label-md text-label-md">Risk Management</span>
+</a>
+</nav>
+<div class="px-3 mt-auto space-y-1">
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background overflow-hidden">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-gutter h-16 w-full sticky top-0 z-50 bg-surface border-b border-border shadow-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border rounded-lg text-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Search POs, Vendors, or Materials..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<!-- Language Switcher -->
+<div class="flex items-center bg-surface-container-low border border-border rounded-lg p-0.5 mr-2">
+<button class="px-3 py-1 text-label-sm font-bold bg-surface shadow-sm rounded-md text-primary transition-all">EN</button>
+<button class="px-3 py-1 text-label-sm font-medium text-secondary hover:text-on-surface transition-all">ID</button>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-full text-secondary transition-transform active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full text-secondary transition-transform active:scale-95">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container ml-2">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 overflow-y-auto p-gutter space-y-section-gap">
+<!-- Page Header Actions -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Procurement Cycle: <span class="text-primary">#PO-2024-0892</span></h2>
+<p class="text-body-md text-secondary">Project: Riverside Commercial Complex - Phase 2</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center px-4 py-2 bg-surface border border-border text-secondary font-label-md rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined mr-2">download</span> Export PDF
+                    </button>
+<button class="flex items-center px-6 py-2 bg-primary text-on-primary font-label-md rounded-lg hover:bg-primary-container transition-shadow shadow-md">
+<span class="material-symbols-outlined mr-2" style="font-variation-settings: 'FILL' 1;">send</span> Send to Director for E-Sign
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Column: Vendor List & Comparison -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<!-- Vendor Comparison Table -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center">
+<span class="material-symbols-outlined mr-2 text-primary">balance</span>
+                                Multi-Vendor Price Comparison
+                            </h3>
+<span class="px-3 py-1 bg-success/10 text-success rounded-full font-label-sm text-label-sm flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                Auto-Select Enabled
+                            </span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-separate border-spacing-0">
+<thead>
+<tr class="text-left bg-surface-container-low">
+<th class="p-4 font-label-md text-label-md text-secondary border-b border-border first:rounded-tl-lg">Line Item</th>
+<th class="p-4 font-label-md text-label-md text-secondary border-b border-border">Titan Steel Ind.</th>
+<th class="p-4 font-label-md text-label-md text-secondary border-b border-border bg-success/5">Apex Metals (Selected)</th>
+<th class="p-4 font-label-md text-label-md text-secondary border-b border-border last:rounded-tr-lg">Global Foundry</th>
+</tr>
+</thead>
+<tbody class="text-table-data">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 border-b border-border font-medium">Rebar Grade 60 (100 Tons)</td>
+<td class="p-4 border-b border-border">Rp 1.302.000.000</td>
+<td class="p-4 border-b border-border bg-success/5 font-bold text-success">Rp 1.263.250.000</td>
+<td class="p-4 border-b border-border">Rp 1.289.600.000</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 border-b border-border font-medium">Structural I-Beams</td>
+<td class="p-4 border-b border-border">Rp 192.200.000</td>
+<td class="p-4 border-b border-border bg-success/5 font-bold text-success">Rp 182.900.000</td>
+<td class="p-4 border-b border-border">Rp 203.050.000</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 border-b border-border font-medium">Delivery Lead Time</td>
+<td class="p-4 border-b border-border">14 Days</td>
+<td class="p-4 border-b border-border bg-success/5">5 Days</td>
+<td class="p-4 border-b border-border">10 Days</td>
+</tr>
+<tr class="bg-surface-container-highest/20">
+<td class="p-4 font-bold">Total Estimated Value</td>
+<td class="p-4 font-bold text-on-surface">Rp 1.494.200.000</td>
+<td class="p-4 font-bold text-success bg-success/10 best-value-glow">Rp 1.446.150.000</td>
+<td class="p-4 font-bold text-on-surface">Rp 1.492.650.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Vendor Management List -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center">
+<span class="material-symbols-outlined mr-2 text-primary">badge</span>
+                            Vendor Performance &amp; Compliance
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Vendor Card 1 -->
+<div class="p-4 rounded-lg border border-border bg-surface-container-lowest hover:border-primary/40 transition-all flex gap-4 items-start">
+<div class="h-12 w-12 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary">factory</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Apex Metals Ltd</h4>
+<div class="flex text-warning">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star_half</span>
+</div>
+</div>
+<p class="text-label-sm text-secondary mb-3">Preferred Supplier (Tier 1)</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-0.5 rounded bg-success/10 text-success text-[11px] font-bold border border-success/20">LEGAL: VERIFIED</span>
+<span class="px-2 py-0.5 rounded bg-info/10 text-info text-[11px] font-bold border border-info/20">ISO 9001</span>
+</div>
+</div>
+</div>
+<!-- Vendor Card 2 -->
+<div class="p-4 rounded-lg border border-border bg-surface-container-lowest hover:border-primary/40 transition-all flex gap-4 items-start opacity-75">
+<div class="h-12 w-12 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary">precision_manufacturing</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Titan Steel Ind.</h4>
+<div class="flex text-warning">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+</div>
+<p class="text-label-sm text-secondary mb-3">General Contractor</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-0.5 rounded bg-danger/10 text-danger text-[11px] font-bold border border-danger/20">LEGAL: EXPIRED</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary text-[11px] font-bold">RE-AUDIT REQ.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Verification & History -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Document Verification Checklist -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center">
+<span class="material-symbols-outlined mr-2 text-primary">fact_check</span>
+                            Doc Verification
+                        </h3>
+<div class="space-y-3">
+<div class="flex items-center p-3 rounded-lg bg-success/5 border border-success/20">
+<span class="material-symbols-outlined text-success mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Invoice #INV-992</p>
+<p class="text-[11px] text-secondary">Verified by Accounts on 12 Aug</p>
+</div>
+<span class="material-symbols-outlined text-outline">visibility</span>
+</div>
+<div class="flex items-center p-3 rounded-lg bg-surface-container-low border border-border">
+<span class="material-symbols-outlined text-outline mr-3">radio_button_unchecked</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">DO (Delivery Order)</p>
+<p class="text-[11px] text-secondary">Awaiting warehouse scan...</p>
+</div>
+<span class="material-symbols-outlined text-outline">upload</span>
+</div>
+<div class="flex items-center p-3 rounded-lg bg-surface-container-low border border-border opacity-50">
+<span class="material-symbols-outlined text-outline mr-3">lock</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">BAST (Final Acceptance)</p>
+<p class="text-[11px] text-secondary">Pending delivery completion</p>
+</div>
+</div>
+</div>
+</div>
+<!-- PO Revision History -->
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Revision History</h3>
+<button class="text-primary font-label-sm text-label-sm hover:underline">View All</button>
+</div>
+<div class="relative border-l-2 border-border ml-2 pl-6 space-y-6">
+<!-- Current Revision -->
+<div class="relative">
+<div class="absolute -left-[31px] top-0 h-4 w-4 rounded-full bg-primary ring-4 ring-primary/20"></div>
+<p class="font-label-md text-label-md text-primary font-bold">Rev 1 (Latest)</p>
+<p class="text-body-md text-on-surface">Price adjustment based on bulk discount update.</p>
+<p class="text-[11px] text-secondary mt-1">Aug 14, 2024 • 14:20 by John S.</p>
+</div>
+<!-- Older Revision -->
+<div class="relative opacity-60">
+<div class="absolute -left-[31px] top-0 h-4 w-4 rounded-full bg-outline"></div>
+<p class="font-label-md text-label-md text-on-surface">Rev 0 (Initial)</p>
+<p class="text-body-md text-on-surface">Initial RFQ generated from project master plan.</p>
+<p class="text-[11px] text-secondary mt-1">Aug 10, 2024 • 09:15 by John S.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- PDF Export Preview Overlay (Mockup Section) -->
+<div class="col-span-12">
+<div class="bg-surface border border-border rounded-xl overflow-hidden shadow-sm">
+<div class="bg-surface-container-high px-6 py-3 border-b border-border flex justify-between items-center">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md text-secondary">PDF EXPORT PREVIEW: PO-2024-0892.pdf</span>
+<button class="flex items-center text-primary font-label-sm text-label-sm hover:underline group">
+<span class="material-symbols-outlined text-[16px] mr-1 group-hover:rotate-45 transition-transform">settings</span>
+                                    Configure Print Layout
+                                </button>
+</div>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-surface-container rounded"><span class="material-symbols-outlined text-[20px]">zoom_in</span></button>
+<button class="p-1 hover:bg-surface-container rounded"><span class="material-symbols-outlined text-[20px]">zoom_out</span></button>
+<button class="p-1 hover:bg-surface-container rounded"><span class="material-symbols-outlined text-[20px]">print</span></button>
+</div>
+</div>
+<div class="p-gutter po-preview-container bg-surface-container-lowest flex justify-center">
+<!-- The PO Sheet -->
+<div class="bg-white w-full max-w-[800px] aspect-[1/1.414] shadow-2xl p-12 border border-slate-100 flex flex-col text-[#1e293b]">
+<div class="flex justify-between items-start border-b-2 border-slate-900 pb-8 mb-8">
+<div>
+<h1 class="text-2xl font-bold uppercase tracking-tight">Purchase Order</h1>
+<p class="text-sm font-bold text-primary mt-1">#PO-2024-0892 - REV 1</p>
+</div>
+<div class="text-right">
+<h2 class="font-bold">Mini-ERP Pro Corp</h2>
+<p class="text-xs text-slate-500">123 Industrial Way, Silicon Valley<br/>contact@minierppro.com</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-12 mb-12">
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Vendor</p>
+<p class="font-bold">Apex Metals Ltd</p>
+<p class="text-xs text-slate-500">45 Metalworking Plaza, East District<br/>Reg ID: 992-AXL-02</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Ship To</p>
+<p class="font-bold">Riverside Site Office</p>
+<p class="text-xs text-slate-500">Block G, Riverside Commercial Complex<br/>Attn: Site Manager</p>
+</div>
+</div>
+<table class="w-full text-sm mb-12">
+<thead>
+<tr class="bg-slate-900 text-white">
+<th class="p-2 text-left">Description</th>
+<th class="p-2 text-center">Qty</th>
+<th class="p-2 text-right">Unit Price</th>
+<th class="p-2 text-right">Total</th>
+</tr>
+</thead>
+<tbody class="border-b border-slate-200">
+<tr>
+<td class="p-2 border-b border-slate-100">Reinforcement Steel Bar - Grade 60 (12mm)</td>
+<td class="p-2 text-center border-b border-slate-100">100 T</td>
+<td class="p-2 text-right border-b border-slate-100">Rp 12.632.500</td>
+<td class="p-2 text-right border-b border-slate-100">Rp 1.263.250.000</td>
+</tr>
+<tr>
+<td class="p-2 border-b border-slate-100">Structural I-Beam Section - ASTM A36</td>
+<td class="p-2 text-center border-b border-slate-100">24 Units</td>
+<td class="p-2 text-right border-b border-slate-100">Rp 7.620.833</td>
+<td class="p-2 text-right border-b border-slate-100">Rp 182.900.000</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="2"></td>
+<td class="p-2 text-right font-bold pt-4">Subtotal</td>
+<td class="p-2 text-right font-bold pt-4">Rp 1.446.150.000</td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td class="p-2 text-right font-bold">Tax (0%)</td>
+<td class="p-2 text-right font-bold">Rp 0</td>
+</tr>
+<tr class="text-lg">
+<td colspan="2"></td>
+<td class="p-2 text-right font-bold text-primary">Grand Total</td>
+<td class="p-2 text-right font-bold text-primary">Rp 1.446.150.000</td>
+</tr>
+</tfoot>
+</table>
+<div class="mt-auto grid grid-cols-2 gap-24 pt-12">
+<div class="border-t border-slate-300 pt-2 text-center">
+<p class="text-[10px] uppercase font-bold text-slate-400">Authorized Preparer</p>
+<p class="mt-4 font-body-md italic text-slate-400">Electronic Signature Applied</p>
+<p class="text-sm font-bold mt-2">John S. Procurement</p>
+</div>
+<div class="border-t border-slate-300 pt-2 text-center">
+<p class="text-[10px] uppercase font-bold text-slate-400">Director Approval</p>
+<div class="mt-2 h-12 flex items-center justify-center">
+<span class="text-xs text-danger uppercase border-2 border-danger border-dashed px-4 py-1 rotate-[-5deg]">Pending E-Sign</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for quick action -->
+<button class="fixed bottom-8 right-8 h-14 w-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-[60]">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<script>
+        // Simple interactivity for the document checklist
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            if(icon.innerText === 'radio_button_unchecked') {
+                icon.parentElement.addEventListener('click', function() {
+                    this.classList.replace('bg-surface-container-low', 'bg-success/5');
+                    this.classList.replace('border-border', 'border-success/20');
+                    icon.innerText = 'check_circle';
+                    icon.classList.add('text-success');
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                });
+            }
+        });
+    </script>
+</body></html>

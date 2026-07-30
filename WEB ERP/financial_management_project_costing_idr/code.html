@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ContractorERP | Financial Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for data density */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "success": "#10b981",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "error": "#ba1a1a",
+                      "danger": "#f43f5e",
+                      "on-primary-container": "#fefcff",
+                      "inverse-on-surface": "#eff1f3",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "on-tertiary-fixed": "#002113",
+                      "background": "#f7f9fb",
+                      "on-secondary-fixed": "#131b2e",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "tertiary": "#006947",
+                      "tertiary-fixed": "#6ffbbe",
+                      "tertiary-container": "#00855b",
+                      "on-surface": "#191c1e",
+                      "on-primary-fixed": "#001a42",
+                      "info": "#0ea5e9",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed-dim": "#adc6ff",
+                      "border": "#e2e8f0",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#d8dadc",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#e6e8ea",
+                      "secondary": "#565e74",
+                      "on-surface-variant": "#424754",
+                      "surface": "#ffffff",
+                      "surface-container": "#eceef0",
+                      "primary-container": "#2170e4",
+                      "surface-bright": "#f7f9fb",
+                      "inverse-primary": "#adc6ff",
+                      "on-secondary-container": "#5c647a",
+                      "on-primary-fixed-variant": "#004395",
+                      "on-tertiary-container": "#f5fff6",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#dae2fd",
+                      "primary": "#0058be",
+                      "outline-variant": "#c2c6d6",
+                      "surface-tint": "#005ac2",
+                      "secondary-fixed": "#dae2fd",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e0e3e5",
+                      "on-primary": "#ffffff",
+                      "outline": "#727785",
+                      "warning": "#f59e0b",
+                      "primary-fixed": "#d8e2ff",
+                      "on-background": "#191c1e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-gap": "32px",
+                      "gutter": "16px",
+                      "base": "4px",
+                      "container-margin": "24px",
+                      "input-padding-y": "8px",
+                      "input-padding-x": "12px"
+              },
+              "fontFamily": {
+                      "table-data": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "table-data": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Side Navigation Shell -->
+<nav class="flex flex-col h-full py-4 px-2 gap-2 fixed left-0 top-0 overflow-y-auto bg-surface border-r border-border h-screen w-64 z-40 hidden md:flex">
+<div class="px-4 py-6">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">ContractorERP</h1>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 mb-4 rounded-xl bg-surface-container-low border border-outline-variant">
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate project manager in a bright industrial office setting, clean lighting, minimalist business attire, soft blurred office background with architectural blueprints." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEWWlM6imLpaK89DqPtRTWPpMlkBuwwPkmZEAuQIP2aqrtPcqsNAyO1Jhdmayaz6dTbvtbAEL7-HamhjUX1Z5eK5kssrLB4-niHkewCLaRKMhdp5PVgh0QwDg4zarOsONGq009sjovNPJNDhIzKuVmFhdGzCoCMjDrT48JGyc4jT4U6ZTYp9RPhiKV3nHf-x2RJre_fF_e9J9-3XSa6ApKgEtjuSbw1cGC7NJQy9L48eDIX-IdlUSGkQ"/>
+</div>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md text-primary truncate">Project Manager</p>
+<p class="text-xs text-secondary truncate">Indo-Industrial Corp</p>
+</div>
+</div>
+<!-- Main Tabs -->
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-label-md text-label-md">Estimation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-label-md text-label-md">Operation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Finance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">HR</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md text-label-md">QHSSE</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Risk Management</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-1 border-t border-border pt-4">
+<button class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</button>
+<button class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg transition-all">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</button>
+<div class="px-4 py-2 mt-2">
+<button class="w-full py-2 px-4 bg-primary text-on-primary rounded-lg font-label-md text-label-md">Manage Entities</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-full px-container-margin h-16 sticky top-0 z-50 bg-surface border-b border-border shadow-sm">
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-4">
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors" href="#">Operation</a>
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="#">Finance</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-low rounded-full px-4 py-1.5 border border-outline-variant mr-2">
+<span class="material-symbols-outlined text-secondary mr-2 text-sm">translate</span>
+<span class="font-label-md text-label-md text-secondary">EN/ID</span>
+</div>
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-all">notifications</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-all">account_circle</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all">Create Project</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-container-margin max-w-[1440px] mx-auto">
+<!-- Cash Flow & Quick Stats Section (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-section-gap">
+<!-- Cash Flow Summary -->
+<div class="md:col-span-8 bg-surface rounded-3xl p-6 border border-border shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md">Cash Flow Summary</h2>
+<p class="text-secondary font-body-md">Real-time liquidity tracking in IDR</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-high rounded-full font-label-sm text-label-sm text-secondary">Last 30 Days</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary-container/10 p-5 rounded-2xl border border-primary/10">
+<p class="text-secondary font-label-md mb-1">Operating Cash</p>
+<p class="font-display text-display text-primary tracking-tighter">Rp 4.2B</p>
+<div class="flex items-center gap-1 text-success mt-2 font-label-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12.4%</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl border border-border">
+<p class="text-secondary font-label-md mb-1">Accounts Receivable</p>
+<p class="font-display text-display text-on-surface tracking-tighter">Rp 840M</p>
+<div class="flex items-center gap-1 text-warning mt-2 font-label-sm">
+<span class="material-symbols-outlined text-sm">pending</span>
+<span>14 Pending</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl border border-border">
+<p class="text-secondary font-label-md mb-1">Accounts Payable</p>
+<p class="font-display text-display text-on-surface tracking-tighter">Rp 1.1B</p>
+<div class="flex items-center gap-1 text-danger mt-2 font-label-sm">
+<span class="material-symbols-outlined text-sm">priority_high</span>
+<span>8 Due Soon</span>
+</div>
+</div>
+</div>
+<!-- Decorative Chart Background -->
+<div class="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none"></div>
+</div>
+<!-- Financial Statements Widget -->
+<div class="md:col-span-4 bg-inverse-surface text-inverse-on-surface rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md mb-4">Financial Reports</h2>
+<p class="text-outline-variant font-body-md mb-6">Access auto-generated statements for audit compliance.</p>
+<div class="space-y-3">
+<a class="flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/5" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">account_balance</span>
+<span class="font-label-md">General Ledger</span>
+</div>
+<span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</a>
+<a class="flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/5" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">analytics</span>
+<span class="font-label-md">Balance Sheet</span>
+</div>
+<span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</a>
+<a class="flex items-center justify-between p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/5" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">receipt_long</span>
+<span class="font-label-md">Profit &amp; Loss (P&amp;L)</span>
+</div>
+<span class="material-symbols-outlined text-sm">arrow_forward_ios</span>
+</a>
+</div>
+</div>
+<button class="mt-6 w-full py-3 bg-tertiary-fixed text-on-tertiary-fixed rounded-xl font-bold font-label-md hover:bg-tertiary-fixed-dim transition-all">Download Annual Report</button>
+</div>
+</div>
+<!-- Main Tables Section -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<!-- Project Costing Table (Real-time Profitability) -->
+<div class="xl:col-span-2 bg-surface rounded-3xl border border-border shadow-sm overflow-hidden flex flex-col">
+<div class="p-6 border-b border-border flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md">Project Profitability</h2>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-secondary text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-sm w-48 focus:ring-2 focus:ring-primary/20" placeholder="Search projects..." type="text"/>
+</div>
+<button class="p-2 border border-border rounded-lg text-secondary hover:bg-surface-container-low">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-secondary font-label-sm border-b border-border">
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Project Name</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Budget</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Actual Cost</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Margin %</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">apartment</span>
+</div>
+<div>
+<p class="font-table-data text-table-data font-semibold text-on-surface">Kuningan Office Tower</p>
+<p class="text-[11px] text-secondary">Contract #2934</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-table-data text-table-data">Rp 12,400.0M</td>
+<td class="px-6 py-5 font-table-data text-table-data text-danger">Rp 10,200.5M</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-success rounded-full" style="width: 17.7%"></div>
+</div>
+<span class="font-table-data text-table-data text-success font-bold">17.7%</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="font-label-sm text-label-sm">Active</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">factory</span>
+</div>
+<div>
+<p class="font-table-data text-table-data font-semibold text-on-surface">Karawang Factory Extension</p>
+<p class="text-[11px] text-secondary">Contract #4412</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-table-data text-table-data">Rp 8,500.0M</td>
+<td class="px-6 py-5 font-table-data text-table-data">Rp 8,420.2M</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-danger rounded-full" style="width: 0.9%"></div>
+</div>
+<span class="font-table-data text-table-data text-danger font-bold">0.9%</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-warning"></span>
+<span class="font-label-sm text-label-sm">Warning</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">video_file</span>
+</div>
+<div>
+<p class="font-table-data text-table-data font-semibold text-on-surface">Bekasi Bridge Retrofit</p>
+<p class="text-[11px] text-secondary">Contract #1109</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-table-data text-table-data">Rp 3,200.0M</td>
+<td class="px-6 py-5 font-table-data text-table-data">Rp 2,100.0M</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-info rounded-full" style="width: 34.3%"></div>
+</div>
+<span class="font-table-data text-table-data text-info font-bold">34.3%</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-info"></span>
+<span class="font-label-sm text-label-sm">Pending</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Payment Management (Vendors & HR) -->
+<div class="bg-surface rounded-3xl border border-border shadow-sm flex flex-col h-full">
+<div class="p-6 border-b border-border">
+<h2 class="font-headline-md text-headline-md">Payments Management</h2>
+<div class="flex mt-4 bg-surface-container-low p-1 rounded-lg">
+<button class="flex-1 py-1.5 bg-white shadow-sm rounded-md font-label-sm text-label-sm font-semibold">Vendors</button>
+<button class="flex-1 py-1.5 text-secondary font-label-sm text-label-sm">HR Reimburses</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-4">
+<!-- Payment Item 1 -->
+<div class="p-4 border border-border rounded-2xl bg-white hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-bold text-primary">SC</div>
+<div>
+<p class="font-label-md text-label-md">SteelCo Industries</p>
+<p class="text-[11px] text-secondary">INV-2023-001</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-danger/10 text-danger text-[10px] font-bold uppercase rounded">Critical</span>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<p class="text-[11px] text-secondary uppercase tracking-wider font-bold">Amount Due</p>
+<p class="font-headline-md text-headline-md text-on-surface">Rp 245M</p>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:brightness-110 transition-all">Pay Now</button>
+</div>
+</div>
+<!-- Payment Item 2 -->
+<div class="p-4 border border-border rounded-2xl bg-white hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-bold text-primary">BP</div>
+<div>
+<p class="font-label-md text-label-md">Beton Perkasa Tbk</p>
+<p class="text-[11px] text-secondary">INV-2023-882</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-warning/10 text-warning text-[10px] font-bold uppercase rounded">Standard</span>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<p class="text-[11px] text-secondary uppercase tracking-wider font-bold">Amount Due</p>
+<p class="font-headline-md text-headline-md text-on-surface">Rp 120M</p>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:brightness-110 transition-all">Pay Now</button>
+</div>
+</div>
+<!-- Payment Item 3 -->
+<div class="p-4 border border-border rounded-2xl bg-white hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center font-bold text-primary">HR</div>
+<div>
+<p class="font-label-md text-label-md">Budi Santoso</p>
+<p class="text-[11px] text-secondary">Travel Reimbursement</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-info/10 text-info text-[10px] font-bold uppercase rounded">Routine</span>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<p class="text-[11px] text-secondary uppercase tracking-wider font-bold">Amount Due</p>
+<p class="font-headline-md text-headline-md text-on-surface">Rp 2.4M</p>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:brightness-110 transition-all">Pay Now</button>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-border bg-surface-container-low/50">
+<button class="w-full text-center text-primary font-label-md hover:underline">View All Outstanding (12)</button>
+</div>
+</div>
+</div>
+<!-- Bottom Action Row -->
+<div class="mt-section-gap grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface p-4 rounded-2xl border border-border flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-info/10 text-info flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Audit Log</p>
+<p class="text-xs text-secondary">3 new entries today</p>
+</div>
+</div>
+<div class="bg-surface p-4 rounded-2xl border border-border flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-success/10 text-success flex items-center justify-center">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Tax Compliance</p>
+<p class="text-xs text-secondary">All filings current</p>
+</div>
+</div>
+<div class="bg-surface p-4 rounded-2xl border border-border flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-warning/10 text-warning flex items-center justify-center">
+<span class="material-symbols-outlined">alarm</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Scheduled Payments</p>
+<p class="text-xs text-secondary">Next batch: Friday</p>
+</div>
+</div>
+<div class="bg-surface p-4 rounded-2xl border border-border flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">sync</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">ERP Sync</p>
+<p class="text-xs text-secondary">Last synced 2m ago</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Navigation Shell -->
+<div class="fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-border flex justify-around items-center md:hidden z-50">
+<button class="flex flex-col items-center text-secondary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center text-secondary">
+<span class="material-symbols-outlined">construction</span>
+<span class="text-[10px]">Ops</span>
+</button>
+<button class="flex flex-col items-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="text-[10px] font-bold">Finance</span>
+</button>
+<button class="flex flex-col items-center text-secondary">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-[10px]">HR</span>
+</button>
+<button class="flex flex-col items-center text-secondary">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="text-[10px]">Menu</span>
+</button>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        // Simple interactive feedback for payment buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.97)';
+            });
+            button.addEventListener('mouseup', function() {
+                this.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Tab switcher simulation
+        const paymentTabs = document.querySelectorAll('.bg-surface-container-low button');
+        paymentTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                paymentTabs.forEach(t => {
+                    t.classList.remove('bg-white', 'shadow-sm', 'font-semibold');
+                    t.classList.add('text-secondary');
+                });
+                this.classList.add('bg-white', 'shadow-sm', 'font-semibold');
+                this.classList.remove('text-secondary');
+            });
+        });
+    </script>
+</body></html>

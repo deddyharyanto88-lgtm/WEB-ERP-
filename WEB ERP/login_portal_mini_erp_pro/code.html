@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Mini-ERP Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .login-card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-surface": "#191c1e",
+                        "surface": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "success": "#10b981",
+                        "secondary-fixed": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-variant": "#e0e3e5",
+                        "primary-container": "#2170e4",
+                        "on-secondary-container": "#5c647a",
+                        "border": "#e2e8f0",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary-fixed": "#001a42",
+                        "outline-variant": "#c2c6d6",
+                        "info": "#0ea5e9",
+                        "on-primary-container": "#fefcff",
+                        "on-surface-variant": "#424754",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#006947",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#005ac2",
+                        "warning": "#f59e0b",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#adc6ff",
+                        "tertiary-container": "#00855b",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-container": "#dae2fd",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#131b2e",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "secondary": "#565e74",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-tertiary-container": "#f5fff6",
+                        "outline": "#727785",
+                        "danger": "#f43f5e",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#0058be",
+                        "primary-fixed": "#d8e2ff",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "inverse-on-surface": "#eff1f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "input-padding-x": "12px",
+                        "container-margin": "24px",
+                        "base": "4px",
+                        "section-gap": "32px",
+                        "gutter": "16px",
+                        "input-padding-y": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "table-data": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "table-data": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen flex flex-col justify-center items-center p-gutter relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+<div class="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary-fixed opacity-20 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[35%] h-[35%] bg-secondary-fixed opacity-20 rounded-full blur-[100px]"></div>
+</div>
+<!-- Main Content Container -->
+<main class="w-full max-w-[440px] z-10">
+<!-- Brand Header -->
+<div class="flex flex-col items-center mb-section-gap">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<div class="flex flex-col">
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight leading-none">Mini-ERP Pro</h1>
+<span class="font-label-sm text-label-sm text-on-secondary-container tracking-widest uppercase opacity-70">Infrastructure &amp; Operations</span>
+</div>
+</div>
+</div>
+<!-- Login Card -->
+<section class="bg-surface border border-border rounded-[24px] p-8 login-card">
+<div class="mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Welcome back</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Please enter your credentials to manage your entity.</p>
+</div>
+<form class="space-y-5" onsubmit="event.preventDefault(); window.location.reload();">
+<!-- Entity Selection (Multi-PT) -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2" for="entity">
+<span class="material-symbols-outlined text-[18px]">corporate_fare</span>
+                        Select Entity
+                    </label>
+<div class="relative">
+<select class="w-full bg-white border border-border rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all appearance-none outline-none" id="entity">
+<option disabled="" selected="" value="">Select Company / PT</option>
+<option value="pt1">PT. BuildConstruct Indonesia</option>
+<option value="pt2">PT. Logistics Global Perkasa</option>
+<option value="pt3">PT. Infrastructure Solutions</option>
+</select>
+<div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Username/Email -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2" for="username">
+<span class="material-symbols-outlined text-[18px]">person</span>
+                        Username or Email
+                    </label>
+<input class="w-full bg-white border border-border rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" id="username" placeholder="name@company.com" type="text"/>
+</div>
+<!-- Password -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2" for="password">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+                            Password
+                        </label>
+<a class="font-label-sm text-label-sm text-primary hover:underline transition-all" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-white border border-border rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-3 flex items-center text-outline hover:text-on-surface-variant transition-colors" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined" id="eye-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Sign In Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-label-md text-label-md py-4 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-primary/10 active:scale-[0.98] transition-all mt-2" type="submit">
+                    Sign In
+                    <span class="material-symbols-outlined text-[20px]">login</span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="mt-8 flex flex-col items-center gap-4">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Don't have an account? <a class="text-primary font-semibold hover:underline" href="#">Contact System Admin</a>
+</p>
+<div class="h-px w-full bg-border"></div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">shield</span>
+<span class="font-label-sm text-label-sm">Secured Login</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">cloud</span>
+<span class="font-label-sm text-label-sm">Cloud Infrastructure</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Actions (Language) -->
+<div class="mt-8 flex justify-center items-center gap-4">
+<div class="flex p-1 bg-surface-container border border-border rounded-full">
+<button class="px-4 py-1.5 rounded-full font-label-sm text-label-sm bg-surface text-primary shadow-sm transition-all" id="lang-en">EN</button>
+<button class="px-4 py-1.5 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface/50 transition-all" id="lang-id">ID</button>
+</div>
+<div class="w-1.5 h-1.5 bg-border rounded-full"></div>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</main>
+<!-- Visual Polish: Decorative elements in foreground corners -->
+<div class="fixed bottom-gutter left-gutter hidden md:block">
+<p class="font-label-sm text-label-sm text-outline select-none">© 2024 Mini-ERP Pro Systems v4.2.1</p>
+</div>
+<div class="fixed top-gutter right-gutter hidden md:block">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-border rounded-lg text-success font-label-sm text-label-sm">
+<span class="w-2 h-2 bg-success rounded-full animate-pulse"></span>
+            All Systems Operational
+        </div>
+</div>
+<script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerText = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerText = 'visibility';
+            }
+        }
+
+        // Simple Language Switcher Interaction
+        document.getElementById('lang-en').addEventListener('click', function() {
+            this.classList.add('bg-surface', 'text-primary', 'shadow-sm');
+            document.getElementById('lang-id').classList.remove('bg-surface', 'text-primary', 'shadow-sm');
+            document.getElementById('lang-id').classList.add('text-on-surface-variant');
+        });
+
+        document.getElementById('lang-id').addEventListener('click', function() {
+            this.classList.add('bg-surface', 'text-primary', 'shadow-sm');
+            document.getElementById('lang-en').classList.remove('bg-surface', 'text-primary', 'shadow-sm');
+            document.getElementById('lang-en').classList.add('text-on-surface-variant');
+        });
+    </script>
+</body></html>
