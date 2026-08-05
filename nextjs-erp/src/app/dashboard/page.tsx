@@ -1,16 +1,7 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { DashboardStats, Alert, CashFlowMonth, ProfitabilityPoint } from '@/types'
-
-const months: CashFlowMonth[] = [
-  { month: 'JUL', inflow: 4200000, outflow: 2800000 },
-  { month: 'AUG', inflow: 5800000, outflow: 3200000 },
-  { month: 'SEP', inflow: 6500000, outflow: 3800000 },
-  { month: 'OCT', inflow: 8200000, outflow: 4200000 },
-  { month: 'NOV', inflow: 6100000, outflow: 3600000 },
-  { month: 'DEC', inflow: 7500000, outflow: 4000000 },
-]
 
 const quickActions = [
   { label: 'New Project', icon: 'add_circle', color: 'primary' },
@@ -38,31 +29,113 @@ function SkeletonCard() {
   )
 }
 
+// Memoized stat card component to prevent unnecessary re-renders
+const StatCard = useMemo(() => {
+  return function StatCard({ 
+    title, 
+    value, 
+    icon, 
+    iconColor, 
+    trend, 
+    trendValue, 
+    subtext,
+    progress,
+    indicator 
+  }: {
+    title: string;
+    value: string | number;
+    icon: string;
+    iconColor: string;
+    trend?: string;
+    trendValue?: string;
+    subtext?: string;
+    progress?: number;
+    indicator?: React.ReactNode;
+  }) {
+    return (
+      <div className="rounded-2xl border border-border bg-surface p-6 h-full flex flex-col justify-between">
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <span className={`p-2 bg-${iconColor}/10 rounded-xl text-${iconColor}`}>
+              <span className="material-symbols-outlined text-[20px]">{icon}</span>
+            </span>
+            {trend && (
+              <span className={`text-xs font-bold text-${trend} flex items-center gap-1`}>
+                {trendValue}
+                <span className="material-symbols-outlined text-[14px]">{trend === 'success' ? 'arrow_upward' : trend === 'danger' ? 'arrow_downward' : 'trending_flat'}</span>
+              </span>
+            )}
+          </div>
+          <h3 className="text-sm text-secondary font-medium">{title}</h3>
+          <p className="text-2xl font-bold text-on-surface mt-2">{value}</p>
+          {subtext && <p className={`text-[11px] text-${trend} font-medium mt-2`}>{subtext}</p>}
+        </div>
+        {progress !== undefined && (
+          <div className="mt-4 h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+            <div className="h-full bg-primary rounded-full" style={{ width: `${progress}%` }} />
+          </div>
+        )}
+        {indicator}
+      </div>
+    );
+  }
+}, []);
+
 export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [entity, setEntity] = useState('Global Consolidation')
+  const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    async function load() {
-      try {
-        const res = await fetch(`/api/dashboard/stats?entity=${encodeURIComponent(entity)}`)
-        if (res.ok) {
-          const data = await res.json()
-          setStats(data)
-        }
-      } catch {
-        // silent
-      } finally {
-        setLoading(false)
+  // Memoized fetch function
+  const fetchStats = useCallback(async (selectedEntity: string) => {
+    try {
+      const res = await fetch(`/api/dashboard/stats?entity=${encodeURIComponent(selectedEntity)}`)
+      if (!res.ok) {
+        throw new Error('Failed to fetch stats')
       }
+      const data = await res.json()
+      setStats(data)
+      setError(null)
+    } catch (err) {
+      console.error('Failed to load dashboard stats:', err)
+      setError('Failed to load dashboard data')
+    } finally {
+      setLoading(false)
     }
-    load()
-  }, [entity])
+  }, [])
 
+  // Initial load and entity change
+  useEffect(() => {
+    setLoading(true)
+    fetchStats(entity)
+  }, [entity, fetchStats])
+
+  // Auto-refresh every 30 seconds when not loading
+  useEffect(() => {
+    if (!loading) {
+      const interval = setInterval(() => {
+        fetchStats(entity)
+      }, 30000) // 30 seconds
+      return () => clearInterval(interval)
+    }
+  }, [entity, loading, fetchStats])
+
+  // Memoized calculations to prevent recalculation on every render
   const totalInflow = useMemo(() => stats?.cashFlow.reduce((s, m) => s + m.inflow, 0) ?? 0, [stats])
   const totalOutflow = useMemo(() => stats?.cashFlow.reduce((s, m) => s + m.outflow, 0) ?? 0, [stats])
   const netCash = useMemo(() => totalInflow - totalOutflow, [totalInflow, totalOutflow])
+  
+  // Pre-compute max value for cashflow chart
+  const maxCashFlowValue = useMemo(() => {
+    if (!stats?.cashFlow.length) return 1
+    return Math.max(...stats.cashFlow.map((x) => Math.max(x.inflow, x.outflow)))
+  }, [stats])
+
+  const handleRefresh = useCallback(() => {
+    setLoading(true)
+    fetchStats(entity)
+  }, [entity, fetchStats])
 
   return (
     <div className="p-4 sm:p-6 max-w-[1440px] mx-auto">
@@ -219,10 +292,9 @@ export default function DashboardPage() {
               <div className="h-[300px] bg-surface-container-lowest/50 rounded-xl animate-pulse" />
             ) : (
               <div className="flex items-end gap-4 px-2">
-                {months.map((m) => {
-                  const maxVal = Math.max(...months.map((x) => Math.max(x.inflow, x.outflow)))
-                  const inflowH = (m.inflow / maxVal) * 100
-                  const outflowH = (m.outflow / maxVal) * 100
+                {(stats?.cashFlow ?? []).map((m) => {
+                  const inflowH = (m.inflow / maxCashFlowValue) * 100
+                  const outflowH = (m.outflow / maxCashFlowValue) * 100
                   return (
                     <div key={m.month} className="flex-1 flex flex-col gap-1 items-center">
                       <div className="w-full flex gap-1 items-end justify-center h-48">
